@@ -2,10 +2,10 @@
 echo "=== CONFIGURANDO PROXY COM AUTENTICAÇÃO PARA APT ==="
 
 # Variáveis de proxy
-PROXY_USER="est126350"
-PROXY_PASS="rehulu1974"
-PROXY_HOST="proxy.empresa.local"
-PROXY_PORT="3128"
+PROXY_USER=""
+PROXY_PASS=""
+PROXY_HOST=""
+PROXY_PORT=""
 PROXY_URL="http://${PROXY_USER}:${PROXY_PASS}@${PROXY_HOST}:${PROXY_PORT}/"
 
 # 1. Criar arquivo de configuração do proxy para APT
@@ -17,7 +17,7 @@ EOF
 sudo chmod 644 /etc/apt/apt.conf.d/95proxy
 
 # 2. Remover repositórios problemáticos
-echo "➤ Removendo repositórios problemáticos (MySQL, Spotify, Insomnia)"
+echo "➤ Removendo repositórios problemáticos"
 
 # Backups
 SOURCES_LIST="/etc/apt/sources.list"
@@ -31,7 +31,7 @@ sudo sed -i '/repository.spotify.com/ s/^/#/' "$SOURCES_LIST"
 sudo sed -i '/download.konghq.com/ s/^/#/' "$SOURCES_LIST"
 
 # Remover ou comentar arquivos extras
-echo "   ⏳ Limpando /etc/apt/sources.list.d/..."
+echo "   Limpando /etc/apt/sources.list.d/..."
 for f in /etc/apt/sources.list.d/*.list; do
     if grep -q -E 'repo.mysql.com|repository.spotify.com|download.konghq.com' "$f"; then
         echo "   → Comentando entradas em: $f"
